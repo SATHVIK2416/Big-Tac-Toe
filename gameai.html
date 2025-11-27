@@ -3,118 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Tic-Tac-Toe</title>
+    <title>Big Tac Toe - vs AI</title>
     <link rel="stylesheet" href="assets/css/game.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        .difficulty-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .difficulty-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: "Moderustic", sans-serif;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        
+        .difficulty-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .difficulty-btn.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-color: transparent;
+        }
+        
+        .ai-thinking {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            color: #f093fb;
+            font-weight: 600;
+        }
+        
+        .ai-thinking.active {
+            display: flex;
+        }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(240, 147, 251, 0.3);
+            border-top-color: #f093fb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
     <div class="ultimate-grid">
-        <div class="mini-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="mini-grid" data-grid="0">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
         </div>
-        <div class="mini-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="mini-grid" data-grid="1">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
         </div>
-        <div class="mini-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="mini-grid" data-grid="2">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
         </div>
-        <div class="mini-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="mini-grid" data-grid="3">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
         </div>
-        <div class="mini-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="mini-grid" data-grid="4">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
         </div>
-        <div class="mini-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="mini-grid" data-grid="5">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
         </div>
-        <div class="mini-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="mini-grid" data-grid="6">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
         </div>
-        <div class="mini-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="mini-grid" data-grid="7">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
         </div>
-        <div class="mini-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="mini-grid" data-grid="8">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
         </div>
     </div>
+    
     <div class="side-box">
-        <h1 id="info">Current turn: X</h1>
-        <p id="winner-line"></p>
-        <div class="comments">
-            <p>Thank you for playing this game! It is currently under development with more features to come, and thus, the logic and the view can change in future.</p>
-            <p>At the moment, due to developmental limitations, the game is just optimized to look and feel good on desktops and laptop views, using mobile phone view will surely break it. :p</p></div>
+        <div class="score-board">
+            <div class="score">
+                <span class="score-label">You (X)</span>
+                <span class="score-value X" id="score-x">0</span>
+            </div>
+            <div class="score">
+                <span class="score-label">Draws</span>
+                <span class="score-value draws" id="score-draws">0</span>
+            </div>
+            <div class="score">
+                <span class="score-label">AI (O)</span>
+                <span class="score-value O" id="score-o">0</span>
+            </div>
         </div>
+        
+        <div class="difficulty-selector">
+            <button class="difficulty-btn" data-difficulty="easy">Easy</button>
+            <button class="difficulty-btn active" data-difficulty="medium">Medium</button>
+            <button class="difficulty-btn" data-difficulty="hard">Hard</button>
+        </div>
+        
+        <h1 id="info" class="turn-X">Your turn</h1>
+        <div class="ai-thinking" id="ai-thinking">
+            <div class="spinner"></div>
+            <span>AI is thinking...</span>
+        </div>
+        <p id="winner-line"></p>
+        
+        <div class="btn-container">
+            <button class="game-btn reset-btn" onclick="resetGame()">
+                <i class='bx bx-refresh'></i> New Game
+            </button>
+            <a href="index.html" class="game-btn home-btn">
+                <i class='bx bx-home'></i> Home
+            </a>
+        </div>
+        
+        <div class="comments">
+            <p><strong>Playing against AI:</strong> You are X, AI is O. Select difficulty above.</p>
+            <p>Win small boards to claim them. Get three in a row on the big board to win!</p>
+        </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div class="game-over-overlay" id="game-over-overlay">
+        <div class="game-over-content">
+            <h2 class="game-over-title" id="game-over-title">Game Over!</h2>
+            <div class="game-over-buttons">
+                <button class="game-btn reset-btn" onclick="resetGame()">
+                    <i class='bx bx-refresh'></i> Play Again
+                </button>
+                <a href="index.html" class="game-btn home-btn">
+                    <i class='bx bx-home'></i> Home
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script src="assets/js/artint.js"></script>
 </body>
 </html>
